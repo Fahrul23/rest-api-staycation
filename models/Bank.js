@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose= require('mongoose');
 const { Schema } = mongoose;
 
 const Bank = new Schema({
@@ -12,6 +12,10 @@ const Bank = new Schema({
     },
     name:{
         type: String,
+        required:true
+    },
+    imageUrl:{
+        type:String,
         required:true
     }
 })
