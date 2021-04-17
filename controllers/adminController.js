@@ -103,7 +103,7 @@ module.exports = {
                 name,
                 nameBank,
                 nomorRekening,
-                imageUrl:`Image/${req.file.filename}`
+                imageUrl:`images/${req.file.filename}`
             });
             
             req.flash('alertMessage','Success Add Bank');
