@@ -9,9 +9,14 @@ module.exports = {
         res.render('admin/category/view_category',{category});
     },
     addCategory: async(req,res)=>{
-        const {name} = req.body;
-        await Category.create({name});
-        res.redirect('/admin/category');
+        try {
+            const {name} = req.body;
+            await Category.create({name});
+            res.redirect('/admin/category');
+        } catch (e) {
+             res.redirect('/admin/category');
+        }
+        
     },
     editCategory: async(req,res) =>{
         const {id,name} = req.body;
