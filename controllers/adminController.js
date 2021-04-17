@@ -142,12 +142,28 @@ module.exports = {
                 res.redirect('/admin/bank');
             }
         } catch (error) {
-            console.log(error);
-            // req.flash('alertMessage',`${error.message}`);
-            // req.flash('alertStatus','danger');
-            // res.redirect('/admin/bank');
+            req.flash('alertMessage',`${error.message}`);
+            req.flash('alertStatus','danger');
+            res.redirect('/admin/bank');
             
         }
+    },
+    deleteBank:async(req,res)=>{
+        try {
+            const {id} = req.params;
+            const bank = await Bank.findOne({_id:id})
+            await fs.unlink(path.join(`public/${bank.imageUrl}`));
+            await bank.remove();
+            req.flash('alertMessage','Success Delete Category');
+            req.flash('alertStatus','success');
+            res.redirect('/admin/category');
+            
+        } catch (error) {
+            req.flash('alertMessage',`${error.message}`);
+            req.flash('alertStatus','danger');
+            res.redirect('/admin/bank');   
+        }
+
     },
     viewItem:(req,res) =>{
         res.render('admin/item/view_item',{
